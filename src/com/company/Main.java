@@ -6,16 +6,20 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Triangle triangle = new Triangle("avatar", 10, 7);
+        Triangle triangle = new Triangle("LU", 10, 5);
+        Square square = new Square("LU", 10, 5);
 
 
 //        System.out.print("Please enter the size: ");
 //        int size = in.nextInt();
         try {
-            triangle.drawShape();
+            triangle.generateShape();
             triangle.showBoard();
-        } catch (Exception e) {
 
+            square.generateShape();
+            square.showBoard();
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
         }
 
 
