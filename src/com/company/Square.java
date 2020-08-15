@@ -12,7 +12,7 @@ public class Square extends Shape {
     public void generateShape() throws Exception {
         char[] word = label.toCharArray();
         int wordIndex = 0;
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < board[size - 1].length; j = j + 2) {
                 if (labelLevel == i) {
                     if (word.length > size) throw new Exception("Word too long");
