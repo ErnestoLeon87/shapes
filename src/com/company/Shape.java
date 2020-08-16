@@ -25,9 +25,8 @@ public abstract class Shape {
             System.out.println("");
         }
     }
-
+    
     private void alignText() {
-
     }
 
 

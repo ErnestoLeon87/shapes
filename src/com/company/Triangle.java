@@ -11,25 +11,43 @@ public class Triangle extends Shape {
         this.large = 1;
         this.point = size;
         this.board = new char[size + 1][(size * 2) + 1];
+        this.labelLevel = labelLevel - 1;
     }
 
     @Override
     public void generateShape() throws Exception {
         char[] word = label.toCharArray();
-        if (word.length > this.size) throw new Exception("Word is too large");
+        if (word.length > size) throw new Exception("Word is too large");
+
+        // Calculate the center to print the word
+        int start = 0;
+        if (labelLevel % 2 == 0) {
+            start = (size - (word.length / 2)) - 1;
+        } else {
+            start = size - (word.length / 2);
+        }
+
+
         try {
             int wordIndex = 0;
             int space = point + large;
             for (height = 0; height < board.length - 1; height++) {
                 for (base = point; base < space; base = base + 2) {
                     if (height == labelLevel) {
+
                         if (word.length > space) throw new Exception("The word is too large for this level");
                         if (wordIndex < word.length) {
-                            board[height][base] = word[wordIndex];
+                            if (start == base) {  // Determine where to start to print the label
+                                start = start + 2;
+                                board[height][base] = word[wordIndex];
+                                wordIndex++;
+                            } else {
+                                board[height][base] = 'X';
+                            }
                         } else {
                             board[height][base] = 'X';
                         }
-                        wordIndex++;
+
                     } else {
                         board[height][base] = 'X';
                     }
@@ -40,6 +58,8 @@ public class Triangle extends Shape {
                 point = point - 1;
                 // Word space
                 space = point + large;
+
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage() + " - Something went wrong!!! ");
