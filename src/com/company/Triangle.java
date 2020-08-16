@@ -20,7 +20,7 @@ public class Triangle extends Shape {
         if (word.length > size) throw new Exception("Word is too large");
 
         // Calculate the center to print the word
-        int start = findCenterPrintWord(word);
+        int start = size - word.length;
 
         try {
             int wordIndex = 0;
@@ -58,21 +58,22 @@ public class Triangle extends Shape {
 
     }
 
-    @Override
-    protected int findCenterPrintWord(char[] word) {
-        if (rowLabel % 2 == 0) {
-            if (word.length > 4) {
-                return (size - (word.length / 2)) - 2;
-            } else {
-                return (size - (word.length / 2)) - 1;
-            }
-        } else {
-            return (word.length > 4) ? (size - (word.length / 2)) - 1 : (size - (word.length / 2));
-//            if (word.length > 4) {
-//                return (size - (word.length / 2)) - 1;
-//            } else {
-//                return (size - (word.length / 2));
-//            }
-        }
-    }
+//    @Override
+//    protected int findCenterPrintWord(char[] word) {
+//        return size - word.length;
+////        if (rowLabel % 2 == 0) {
+////            if (word.length > 4) {
+////                return size - word.length;
+////            } else {
+////                return size - word.length / 2;
+////            }
+////        } else {
+////            return (word.length > 4) ? (size - (word.length / 2)) : (size - (word.length / 2));
+//////            if (word.length > 4) {
+//////                return (size - (word.length / 2)) - 1;
+//////            } else {
+//////                return (size - (word.length / 2));
+//////            }
+////        }
+//    }
 }

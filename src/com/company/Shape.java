@@ -1,7 +1,7 @@
 package com.company;
 
 public abstract class Shape {
-    protected String label = "LU";
+    protected String label;
     protected int size;
     protected int rowLabel;
     protected char[][] board;
@@ -25,12 +25,7 @@ public abstract class Shape {
             System.out.println("");
         }
     }
-
-    private void alignText() {
-    }
-
-
+    
     public abstract void generateShape() throws Exception;
 
-    protected abstract int findCenterPrintWord(char[] aWord);
 }

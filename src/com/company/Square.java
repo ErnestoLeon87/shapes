@@ -13,7 +13,7 @@ public class Square extends Shape {
     public void generateShape() throws Exception {
         char[] word = label.toCharArray();
         int wordIndex = 0;
-        int start = findCenterPrintWord(word);
+        int start = size - word.length;
         try {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < board[size - 1].length; j = j + 2) {
@@ -43,12 +43,5 @@ public class Square extends Shape {
 
 
     }
-
-    @Override
-    protected int findCenterPrintWord(char[] aWord) {
-        return (size % 2 == 0) ? size - (aWord.length / 2) - 2 : size - (aWord.length / 2);
-
-
-//        return size - (aWord.length / 2) - 2;
-    }
+    
 }
