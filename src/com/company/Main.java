@@ -90,7 +90,7 @@ public class Main {
 
 
                 case "square":
-                    System.out.println("I'm here & I dont know why");
+
                     try {
                         newShape = new Square(shapeLabel, shapeSize, rowLabel);
                         newShape.generateShape();
