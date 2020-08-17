@@ -13,42 +13,69 @@ public class Main {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Shape newShape;
+        Dimensions dim = new Dimensions();
         String shapeToDraw;
         String shapeLabel;
-        int shapeSize, rowLabel;
+        int shapeSize = 0;
+        int rowLabel = 0;
         boolean run = true;
 
         System.out.println("+------------------------------------+");
-        System.out.println("|           Welcome to draw          |");
+        System.out.println("|          Welcome to Draw           |");
         System.out.println("+------------------------------------+");
 
         while (run) {
 //      Getting the shape the user wants to print
             while (true) {
                 try {
-                    System.out.print("  => What shape should I draw? ( Triangle | Square | Diamond ) ");
+                    System.out.println("  => What shape should I draw? ( Triangle | Square | Diamond | Rectangle ) ");
                     shapeToDraw = reader.readLine();
                     shapeToDraw = shapeToDraw.toLowerCase();
-                    if (shapeToDraw.equals("triangle") || shapeToDraw.equals("square")) {
+                    if (shapeToDraw.equals("triangle")
+                            || shapeToDraw.equals("square")
+                            || shapeToDraw.equals("diamond")
+                            || shapeToDraw.equals("rectangle")) {
                         break;
                     } else {
-                        throw new Exception("\n Wrong shape");
+                        throw new Exception("\n Invalid shape. ");
                     }
                 } catch (Exception ex) {
-                    System.out.println(" Invalid shape, you can draw ( Triangle | Square | Diamond)");
+                    System.out.println(ex.getMessage() + " You can draw ( Triangle | Square | Diamond | Rectangle)");
                 }
             }
 
-//        Getting how tall should be the shape
-            while (true) {
-                try {
-                    System.out.print("  => How tall should the " + shapeToDraw + " be? ");
-                    shapeSize = Integer.parseInt(reader.readLine());
+//        Getting shape dimensions
+            switch (shapeToDraw) {
+                case "rectangle":
+                    while (true) {
+                        try {
+                            System.out.println("  => For a " + shapeToDraw + " I need its width and height");
+                            System.out.print("  => Please enter the width: ");
+                            int width = Integer.parseInt(reader.readLine());
+                            System.out.print("  => Please enter the height: ");
+                            int height = Integer.parseInt(reader.readLine());
+                            dim.setWidth(width);
+                            dim.setHeight(height);
+
+                            break;
+                        } catch (Exception ex) {
+                            System.out.println(" I'm sorry I didn't understand that,\n please enter a positive number");
+                        }
+                    }
                     break;
-                } catch (Exception ex) {
-                    System.out.println(" I'm sorry I didn't understand that,\n please enter a positive number");
-                }
+                default:
+                    while (true) {
+                        try {
+                            System.out.print("  => How tall should the " + shapeToDraw + " be? ");
+                            shapeSize = Integer.parseInt(reader.readLine());
+                            break;
+                        } catch (Exception ex) {
+                            System.out.println(" I'm sorry I didn't understand that,\n please enter a positive number");
+                        }
+                    }
+                    break;
             }
+
 
 //        Getting the label to print in the shape
             while (true) {
@@ -67,12 +94,18 @@ public class Main {
                 try {
                     System.out.print(String.format("   => On what row should I print %s? ", shapeLabel));
                     rowLabel = Integer.parseInt(reader.readLine());
-                    if (rowLabel > shapeSize) throw new Exception(" Invalid row"); // Fix the exception
+                    if (shapeSize == 0) {
+                        if (rowLabel > dim.getHeight())
+                            throw new Exception(" Invalid row"); // Fix the exception
+                    } else {
+                        if (rowLabel > shapeSize)
+                            throw new Exception(" Invalid row"); // Fix the exception
+                    }
                     break;
                 } catch (IOException nx) {
                     System.out.println(" Please enter a positive integer");
                 } catch (Exception ex) {
-                    System.out.println(" Invalid row");
+                    System.out.println(" " + ex.getMessage());
                 }
             }
 
@@ -88,9 +121,7 @@ public class Main {
                     }
                     break;
 
-
                 case "square":
-
                     try {
                         newShape = new Square(shapeLabel, shapeSize, rowLabel);
                         newShape.generateShape();
@@ -100,9 +131,26 @@ public class Main {
                     }
                     break;
 
+                case "diamond":
+                    try {
+                        newShape = new Diamond(shapeLabel, shapeSize, rowLabel);
+                        newShape.generateShape();
+                        newShape.showBoard();
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
 
-                default:
-                    System.out.println();
+                case "rectangle":
+                    try {
+                        newShape = new Rectangle(shapeLabel, dim.getWidth(), dim.getHeight(), rowLabel);
+                        newShape.generateShape();
+                        newShape.showBoard();
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+
             }
 
 

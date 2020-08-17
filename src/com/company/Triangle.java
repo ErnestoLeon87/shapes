@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Triangle extends Shape {
     protected int height, base, point, large;
@@ -11,7 +9,6 @@ public class Triangle extends Shape {
         this.large = 1;
         this.point = size;
         this.board = new char[size + 1][(size * 2) + 1];
-
     }
 
     @Override
@@ -56,5 +53,4 @@ public class Triangle extends Shape {
         }
 
     }
-    
 }

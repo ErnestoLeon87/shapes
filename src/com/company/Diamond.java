@@ -19,7 +19,6 @@ public class Diamond extends Shape {
         try {
             for (int i = board.length / 2; i < board.length + 1; i++) {
                 for (int j = rowStart; j < large; j = j + 2) {
-
                     if (l == rowLabel && rowLabel != board.length / 2) {
                         wordIndex = setWordHelper(word, large, wordStart, wordIndex, l, j);
                     } else {
@@ -33,7 +32,6 @@ public class Diamond extends Shape {
                         board[i][j] = 'X';
                     }
                 }
-
                 large = large - 2;
                 l--;
                 rowStart = rowStart + 2;
@@ -41,7 +39,6 @@ public class Diamond extends Shape {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     private int setWordHelper(char[] word, int large, int wordStart, int wordIndex, int i, int j) throws Exception {
@@ -57,12 +54,5 @@ public class Diamond extends Shape {
             board[i][j] = 'X';
         }
         return wordIndex;
-    }
-
-
-    public static void main(String[] args) throws Exception {
-        Diamond diamond = new Diamond("rebeca Leon", 10, 5);
-        diamond.generateShape();
-        diamond.showBoard();
     }
 }

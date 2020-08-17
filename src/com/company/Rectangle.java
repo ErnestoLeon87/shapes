@@ -1,26 +1,29 @@
 package com.company;
 
-public class Square extends Shape {
+public class Rectangle extends Shape {
+    protected int width, height;
 
-    public Square(String label, int size, int rowLabel) {
-        super(label, size, rowLabel);
-        this.board = new char[size * 2][size * 2];
+    public Rectangle(String label, int width, int height, int rowLabel) {
+        super(label, width, rowLabel);
+        this.board = new char[height][width * 2];
+        this.width = width;
+        this.height = height;
 
     }
 
     @Override
     public void generateShape() throws Exception {
         char[] word = label.toCharArray();
+
         int wordIndex = 0;
-        int wordStart = size - word.length;
+        int wordStart = width - word.length - 1;
         try {
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < height; i++) {
                 for (int j = 0; j < board[i].length; j = j + 2) {
                     if (rowLabel == i) {
-                        if (word.length > size) throw new Exception("Word too long");
+                        if (word.length > width) throw new Exception("Word too long");
                         if (wordIndex < word.length) {
                             if (wordStart <= j) {  // Determine where to start to print the label
-                                
                                 board[i][j] = word[wordIndex];
                                 wordIndex++;
                             } else {
@@ -39,6 +42,12 @@ public class Square extends Shape {
         } catch (Exception e) {
             System.out.println(e.getMessage() + "!!!");
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Rectangle rec = new Rectangle("LU", 25, 8, 4);
+        rec.generateShape();
+        rec.showBoard();
     }
 
 }

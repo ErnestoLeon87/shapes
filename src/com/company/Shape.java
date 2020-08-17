@@ -8,12 +8,15 @@ public abstract class Shape {
     protected int size;
     protected int rowLabel;
     protected char[][] board;
+    protected Dimensions dim;
+
 
     public Shape(String label, int size, int rowLabel) {
         this.label = label;
         this.size = size;
         this.rowLabel = rowLabel - 1;
         this.labels = new HashMap<>();
+        
     }
 
     public void showBoard() {
