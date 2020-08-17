@@ -11,7 +11,7 @@ public class Triangle extends Shape {
         this.large = 1;
         this.point = size;
         this.board = new char[size + 1][(size * 2) + 1];
-        
+
     }
 
     @Override
@@ -20,18 +20,17 @@ public class Triangle extends Shape {
         if (word.length > size) throw new Exception("Word is too large");
 
         // Calculate the center to print the word
-        int start = size - word.length;
-
+        int wordStart = size - word.length;
+        int wordIndex = 0;
+        int space = point + large;
         try {
-            int wordIndex = 0;
-            int space = point + large;
             for (height = 0; height < board.length - 1; height++) {
                 for (base = point; base < space; base = base + 2) {
                     if (height == rowLabel) {
                         if (word.length > space) throw new Exception("The word is too large for this level");
-                        if (wordIndex < word.length) {
-                            if (start <= base) {  // Determine where to start to print the label
-                                start = start + 2;
+                        if (wordIndex < word.length) { // Prevent index out of range
+                            if (wordStart <= base) {  // Determine where to start to print the label
+                                wordStart = wordStart + 2;
                                 board[height][base] = word[wordIndex];
                                 wordIndex++;
                             } else {
@@ -57,23 +56,5 @@ public class Triangle extends Shape {
         }
 
     }
-
-//    @Override
-//    protected int findCenterPrintWord(char[] word) {
-//        return size - word.length;
-////        if (rowLabel % 2 == 0) {
-////            if (word.length > 4) {
-////                return size - word.length;
-////            } else {
-////                return size - word.length / 2;
-////            }
-////        } else {
-////            return (word.length > 4) ? (size - (word.length / 2)) : (size - (word.length / 2));
-//////            if (word.length > 4) {
-//////                return (size - (word.length / 2)) - 1;
-//////            } else {
-//////                return (size - (word.length / 2));
-//////            }
-////        }
-//    }
+    
 }

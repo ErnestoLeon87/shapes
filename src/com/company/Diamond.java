@@ -8,14 +8,23 @@ public class Diamond extends Shape {
 
     @Override
     public void generateShape() throws Exception {
+        char[] word = label.toCharArray();
         int large = size * 2 + 2;
-        int start = 0;
+        int rowStart = 0;
         int l = board.length / 2;
+        int wordStart = size - word.length;
+        int wordIndex = 0;
+
         try {
             for (int i = board.length / 2; i < board.length + 1; i++) {
-                for (int j = start; j < large; j = j + 2) {
+                for (int j = rowStart; j < large; j = j + 2) {
                     if (i == rowLabel) {
-
+                        if (word.length > large) throw new Exception("The word is too large for this level");
+                        if (wordIndex < word.length) {
+                            if (wordStart <= j) {
+                                board[]
+                            }
+                        }
                     }
 
                     board[i][j] = 'X';
@@ -23,22 +32,14 @@ public class Diamond extends Shape {
 
                 }
 
-
                 large = large - 2;
                 l--;
-                start = start + 2;
+                rowStart = rowStart + 2;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-//        for (int i = 0; i < board.length; i++) {
-//            for (int j = start; j <= start + large; j = j + 2) {
-//                board[i][j] = 'X';
-//            }
-//            large = large + 2;
-//            start--;
-//        }
     }
 
 
