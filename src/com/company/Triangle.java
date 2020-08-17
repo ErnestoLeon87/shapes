@@ -11,7 +11,7 @@ public class Triangle extends Shape {
         this.large = 1;
         this.point = size;
         this.board = new char[size + 1][(size * 2) + 1];
-        this.rowLabel = rowLabel - 1;
+        
     }
 
     @Override

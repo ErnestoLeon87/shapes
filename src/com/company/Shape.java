@@ -1,6 +1,9 @@
 package com.company;
 
+import java.util.HashMap;
+
 public abstract class Shape {
+    protected HashMap<Integer, String> labels;
     protected String label;
     protected int size;
     protected int rowLabel;
@@ -9,7 +12,8 @@ public abstract class Shape {
     public Shape(String label, int size, int rowLabel) {
         this.label = label;
         this.size = size;
-        this.rowLabel = rowLabel;
+        this.rowLabel = rowLabel - 1;
+        this.labels = new HashMap<>();
     }
 
     public void showBoard() {
@@ -25,7 +29,7 @@ public abstract class Shape {
             System.out.println("");
         }
     }
-    
+
     public abstract void generateShape() throws Exception;
 
 }
