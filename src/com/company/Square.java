@@ -13,15 +13,15 @@ public class Square extends Shape {
     public void generateShape() throws Exception {
         char[] word = label.toCharArray();
         int wordIndex = 0;
-        int start = size - word.length;
+        int wordStart = size - word.length;
         try {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < board[size - 1].length; j = j + 2) {
                     if (rowLabel == i) {
                         if (word.length > size) throw new Exception("Word too long");
                         if (wordIndex < word.length) {
-                            if (start <= j) {  // Determine where to start to print the label
-                                start = start + 2;
+                            if (wordStart <= j) {  // Determine where to start to print the label
+                                wordStart = wordStart + 2;
                                 board[i][j] = word[wordIndex];
                                 wordIndex++;
                             } else {
@@ -43,5 +43,5 @@ public class Square extends Shape {
 
 
     }
-    
+
 }

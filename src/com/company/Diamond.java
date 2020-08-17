@@ -4,6 +4,7 @@ public class Diamond extends Shape {
     public Diamond(String label, int size, int rowLabel) {
         super(label, size, rowLabel);
         board = new char[size + 1][(size * 2) + 2];
+        this.rowLabel = rowLabel;
     }
 
     @Override
@@ -18,18 +19,19 @@ public class Diamond extends Shape {
         try {
             for (int i = board.length / 2; i < board.length + 1; i++) {
                 for (int j = rowStart; j < large; j = j + 2) {
-                    if (i == rowLabel) {
-                        if (word.length > large) throw new Exception("The word is too large for this level");
-                        if (wordIndex < word.length) {
-                            if (wordStart <= j) {
-                                board[]
-                            }
-                        }
+
+                    if (l == rowLabel && rowLabel != board.length / 2) {
+                        wordIndex = setWordHelper(word, large, wordStart, wordIndex, l, j);
+                    } else {
+                        if (board.length / 2 != l) board[l][j] = 'X';
                     }
 
-                    board[i][j] = 'X';
-                    if (board.length / 2 != l) board[l][j] = 'X';
+                    if (i == rowLabel) {
+                        wordIndex = setWordHelper(word, large, wordStart, wordIndex, i, j);
 
+                    } else {
+                        board[i][j] = 'X';
+                    }
                 }
 
                 large = large - 2;
@@ -42,9 +44,24 @@ public class Diamond extends Shape {
 
     }
 
+    private int setWordHelper(char[] word, int large, int wordStart, int wordIndex, int i, int j) throws Exception {
+        if (word.length > large / 2) throw new Exception("The word is too large for this level");
+        if (wordIndex < word.length) {
+            if (wordStart <= j) {
+                board[i][j] = word[wordIndex];
+                wordIndex++;
+            } else {
+                board[i][j] = 'X';
+            }
+        } else {
+            board[i][j] = 'X';
+        }
+        return wordIndex;
+    }
+
 
     public static void main(String[] args) throws Exception {
-        Diamond diamond = new Diamond("LU", 10, 5);
+        Diamond diamond = new Diamond("rebeca Leon", 10, 5);
         diamond.generateShape();
         diamond.showBoard();
     }
